@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\ParentCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,7 +11,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::all()->where('pid','>', '0');
+        $categories = Category::all();
 
         return view('admin.categories.index', [
             'categories' => $categories,
@@ -19,7 +20,8 @@ class CategoriesController extends Controller
 
     public function create()
     {
-        return view('admin.categories.create');
+        $parentCategories = ParentCategory::all();
+        return view('admin.categories.create',['parentCategories' => $parentCategories]);
     }
 
     public function store(Request $request)

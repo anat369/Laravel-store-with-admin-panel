@@ -34,9 +34,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function goods()
+    public function items()
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Item::class);
     }
 
     /**

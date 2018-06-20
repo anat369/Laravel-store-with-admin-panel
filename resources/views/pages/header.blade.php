@@ -1,6 +1,6 @@
 <?php
 $categories = \App\Category::all();
-$pidCats = \App\Category::getParentCategory();
+$parentCategories = \App\ParentCategory::all();
 ?>
 <header class="header yolo-header-style-3">
     <div class="yolo-top-bar">
@@ -100,9 +100,9 @@ $pidCats = \App\Category::getParentCategory();
                             <li class="active menu-item menu-home"><a href="/">Главная</a>
                             </li>
 
-                            @foreach($pidCats as $pidCat)
-                                <li class="menu-item menu-shop"><a
-                                            href="/category/{{$pidCat->slug}}">{{$pidCat->title}}</a>
+                            @foreach($parentCategories as $pidCat)
+                                <li class="menu-item menu-shop">
+                                    <a href="/category/{{$pidCat->slug}}">{{$pidCat->title}}</a>
                                     <ul class="sub-menu">
                                         <li class="menu_style_dropdown menu-item">
                                             <ul class="sub-menu">

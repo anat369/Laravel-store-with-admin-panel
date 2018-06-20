@@ -7,8 +7,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Добавить подкатегорию
+                Добавить основную категорию
             </h1>
+            <p>В данном разделе можно добавить основную категорию товаров, которая в дальнейшем используется
+                для вывода в меню на сайте и в разделе "Подкатегории"</p>
         </section>
 
         <!-- Main content -->
@@ -16,9 +18,9 @@
 
             <!-- Default box -->
             <div class="box">
-                {!! Form::open(['route' => 'categories.store']) !!}
+                {!! Form::open(['route' => 'parcat.store']) !!}
                 <div class="box-header with-border">
-                    <h3 class="box-title">Добавляем подкатегорию</h3>
+                    <h3 class="box-title">Добавляем основную категорию</h3>
                     @include('admin.errors')
                 </div>
                 <div class="box-body">
@@ -26,14 +28,6 @@
                         <div class="form-group">
                             <label for="exampleInputTitle">Название</label>
                             <input type="text" class="form-control" id="exampleInputTtile" placeholder="" name="title">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPid">Основная категория</label>
-                            <select name="pid" id="exampleInputPid">
-                                @foreach($parentCategories as $parentCategory)
-                                    <option value="{{$parentCategory->id}}">{{$parentCategory->title}}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -44,7 +38,7 @@
                 <!-- /.box-footer-->
                 {!! Form::close() !!}
                 <div class="box-footer">
-                    <a href="{{route('categories.index')}}">
+                    <a href="{{route('parcat.index')}}">
                         <button class="btn btn-default">Назад</button>
                     </a>
                 </div>

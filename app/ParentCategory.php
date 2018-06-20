@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\DB;
 
-class Category extends Model
+class ParentCategory extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title','pid'];
+    protected $fillable = ['title'];
 
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Category::class);
     }
 
     /**
@@ -29,13 +29,6 @@ class Category extends Model
                 'source' => 'title'
             ]
         ];
-    }
-
-    public static function getParentCategory()
-    {
-        $parentCategory = DB::table('categories')->where('pid', 0)->get(['id', 'title', 'slug']);
-
-        return $parentCategory;
     }
 
     /**

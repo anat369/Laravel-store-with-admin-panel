@@ -1,56 +1,59 @@
 @extends('admin.layout')
 
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
-
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Управление подкатегориями</h3>
+                    <h3 class="box-title">Управление товарами</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{route('categories.create')}}" class="btn btn-success">Добавить</a>
+                        <a href="{{route('items.create')}}" class="btn btn-success">Добавить</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Название</th>
+                            <th>Категория</th>
+                            <th>Картинка</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{--проходимся циклом  и выводим все категории--}}
-                        @foreach($categories as $category)
+                        @foreach($items as $item)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->title}}</td>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->title}}</td>
+                                <td>{{$item->getCategoryTitle()}}</td>
                                 <td>
-                                    <a href="{{route('categories.edit', $category->id)}}" class="fa fa-pencil"></a>
-                                    {{Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'delete'])}}
-                                    <button type="submit" class="delete"
-                                            onclick="return confirm('Вы точно хотите удалить?')">
+                                    <img src="{{$item->getImage()}}" alt="" width="100">
+                                </td>
+                                <td>
+                                    <a href="{{route('items.edit', $item->id)}}" class="fa fa-pencil"></a>
+
+                                    {{Form::open(['route'=>['items.destroy', $item->id], 'method'=>'delete'])}}
+                                    <button onclick="return confirm('Вы уверены, что хотите удалить?')" type="submit" class="delete">
                                         <i class="fa fa-remove"></i>
                                     </button>
-                                    {!! Form::close() !!}
+
+                                    {{Form::close()}}
                                 </td>
                             </tr>
                         @endforeach
+                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
 @endsection

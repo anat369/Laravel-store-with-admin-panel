@@ -14,11 +14,13 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
+Route::get('/item/{slug}', 'HomeController@itemsShow')->name('item.show');
+
 Route::get('/contact', 'ContactController@index');
 Route::get('/blog', 'BlogController@index');
 Route::get('/blog/{slug}', 'BlogController@show');
 
-Route::get('/category/{slug}', 'CategoriesController@category');
+Route::get('/category/{slug}', 'CategoriesController@category')->name('category.show');
 
 
 Route::group(['middleware' => 'auth'], function() {
@@ -39,8 +41,9 @@ Route::group(['middleware' => 'guest'], function() {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
     Route::get('/', 'DashboardController@index');
+    Route::resource('/parcat', 'ParentCategoriesController');
     Route::resource('/categories', 'CategoriesController');
     Route::resource('/users', 'UsersController');
-    Route::resource('/goods', 'GoodsController');
+    Route::resource('/items', 'ItemsController');
 });
 
