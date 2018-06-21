@@ -102,7 +102,7 @@ $parentCategories = \App\ParentCategory::all();
 
                             @foreach($parentCategories as $pidCat)
                                 <li class="menu-item menu-shop">
-                                    <a href="/category/{{$pidCat->slug}}">{{$pidCat->title}}</a>
+                                    <a href="#">{{$pidCat->title}}</a>
                                     <ul class="sub-menu">
                                         <li class="menu_style_dropdown menu-item">
                                             <ul class="sub-menu">

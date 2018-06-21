@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/logout', 'AuthController@logout');
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@store');
+    Route::get('/cart', 'CartController@index');
+    Route::get('/wishlist', 'HomeController@wishList');
 });
 
 Route::group(['middleware' => 'guest'], function() {
@@ -45,5 +47,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::resource('/categories', 'CategoriesController');
     Route::resource('/users', 'UsersController');
     Route::resource('/items', 'ItemsController');
+    Route::resource('/orders', 'OrdersController');
 });
 

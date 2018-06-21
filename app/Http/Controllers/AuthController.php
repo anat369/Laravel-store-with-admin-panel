@@ -13,6 +13,10 @@ class AuthController extends Controller
         return view('pages.register');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function register(Request $request)
     {
         $this->validate($request, [
@@ -33,6 +37,10 @@ class AuthController extends Controller
         return view('pages.login');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function login(Request $request)
     {
         $this->validate($request, [

@@ -36,4 +36,9 @@ class HomeController extends Controller
             'category' => $category,
         ]);
     }
+
+    public function wishList()
+    {
+        return view('pages.wishlist');
+    }
 }

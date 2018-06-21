@@ -1,10 +1,9 @@
 @extends('layout')
-
 @section('content')
     <div id="example-wrapper" class="blog blog-detail">
         <div class="div-box">
             <div class="banner-subpage">
-                <figure><img src="/images/background/bg-banner.jpg" alt="bg-banner"/></figure>
+                <figure><img src="images/background/bg-banner.jpg" alt="bg-banner"/></figure>
                 <div class="banner-subpage-content">
                     <h2>Blog Detail</h2>
                     <div class="desc">
@@ -26,11 +25,11 @@
                                             <div class="entry-thumbnail-wrap">
                                                 <div data-number="1" data-margin="0" data-loop="yes"
                                                      data-navcontrol="yes" class="begreen-owl-carousel">
-                                                    <div><img src="/images/demo/blog-list-3.jpg" alt="blog" width="800"
+                                                    <div><img src="images/demo/blog-list-3.jpg" alt="blog" width="800"
                                                               height="500" class="img-responsive"/></div>
-                                                    <div><img src="/images/demo/blog-list-6.jpg" alt="blog" width="800"
+                                                    <div><img src="images/demo/blog-list-6.jpg" alt="blog" width="800"
                                                               height="500" class="img-responsive"/></div>
-                                                    <div><img src="/images/demo/blog-list-4.jpg" alt="blog" width="800"
+                                                    <div><img src="images/demo/blog-list-4.jpg" alt="blog" width="800"
                                                               height="500" class="img-responsive"/></div>
                                                 </div>
                                             </div>
@@ -89,7 +88,7 @@
                                                             reiciendis voluptatibus maiores alias consequatur aut
                                                             perferendis doloribus asperiores repellat.</p>
                                                     </div>
-                                                    <div class="mb-20"><img src="/images/demo/blog-list-5.jpg" alt="blog"
+                                                    <div class="mb-20"><img src="images/demo/blog-list-5.jpg" alt="blog"
                                                                             width="800" height="500"
                                                                             class="img-responsive"/></div>
                                                     <div class="entry-excerpt">
@@ -144,7 +143,7 @@
                             </div>
                         </div>
                         <div class="admin-deatil text-center">
-                            <figure><img src="/images/demo/avartar-2.jpg" alt="avartar"/></figure>
+                            <figure><img src="images/demo/avartar-2.jpg" alt="avartar"/></figure>
                             <h2 class="mb-20"><a href="#">Admin</a></h2>
                             <p>Share a little biographical information to fill out your profile. This may be shown
                                 publicly.</p>
@@ -194,7 +193,7 @@
                     <div class="col-md-3">
                         <div class="sidebar sidebar-product sidebar-blog">
                             <aside class="mb-45 img-sidebar text-center">
-                                <figure><img src="/images/demo/about-us.png" alt="about-us"/></figure>
+                                <figure><img src="images/demo/about-us.png" alt="about-us"/></figure>
                                 <p>Sara Gabrena I love life and the unique position of being a working artist. I love
                                     the thrill of the hunt and am an avid vintage hound, sniffing out the best
                                     one-of-a-kinds.</p>
@@ -219,7 +218,7 @@
                             <aside class="mb-45">
                                 <ul class="posts-thumbnail-list size-thumbnail">
                                     <li class="clearfix">
-                                        <div class="posts-thumbnail-image"><a href="#"><img src="/images/demo/blog1.jpg"
+                                        <div class="posts-thumbnail-image"><a href="#"><img src="images/demo/blog1.jpg"
                                                                                             alt="blog" width="865"
                                                                                             height="585"/></a></div>
                                         <div class="posts-thumbnail-content">
@@ -231,7 +230,7 @@
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <div class="posts-thumbnail-image"><a href="#"><img src="/images/demo/blog3.jpg"
+                                        <div class="posts-thumbnail-image"><a href="#"><img src="images/demo/blog3.jpg"
                                                                                             alt="blog" width="865"
                                                                                             height="585"/></a></div>
                                         <div class="posts-thumbnail-content">
@@ -243,7 +242,7 @@
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <div class="posts-thumbnail-image"><a href="#"><img src="/images/demo/blog6.jpg"
+                                        <div class="posts-thumbnail-image"><a href="#"><img src="images/demo/blog6.jpg"
                                                                                             alt="blog"
                                                                                             height="585"/></a></div>
                                         <div class="posts-thumbnail-content">
@@ -281,7 +280,7 @@
                             </aside>
                             <aside class="mb-45 ad-pot">
                                 <h2 class="text-center mb-20">Ad Spot</h2>
-                                <figure><img src="/images/demo/ad.jpg" alt="ad"/></figure>
+                                <figure><img src="images/demo/ad.jpg" alt="ad"/></figure>
                             </aside>
                         </div>
                     </div>
@@ -292,17 +291,17 @@
         <div class="div-box">
             <div class="slider-instagram">
                 <div data-number="8" data-margin="0" data-loop="no" data-navcontrol="yes" class="begreen-owl-carousel">
-                    <div><a href="#"><img src="/images/demo/instagram-1.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-2.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-3.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-4.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-5.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-6.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-7.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-8.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-6.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-7.jpg" alt="instagram"/></a></div>
-                    <div><a href="#"><img src="/images/demo/instagram-8.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-1.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-2.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-3.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-4.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-5.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-6.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-7.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-8.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-6.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-7.jpg" alt="instagram"/></a></div>
+                    <div><a href="#"><img src="images/demo/instagram-8.jpg" alt="instagram"/></a></div>
                 </div>
                 <div class="slider-instagram-absolute-1 container">
                     <div class="slider-instagram-absolute-1-content">
@@ -320,7 +319,7 @@
             <footer id="yolo-footer-wrapper">
                 <div class="yolo-footer-wrapper footer-3">
                     <div class="footer-col">
-                        <h2><a href="/" class="logo"><img src="/images/logo/logo-footer.png" alt="logo1"
+                        <h2><a href="index.html" class="logo"><img src="images/logo/logo-footer.png" alt="logo1"
                                                                    width="84" height="63"
                                                                    class="vc_single_image-img attachment-full"/></a>
                         </h2>

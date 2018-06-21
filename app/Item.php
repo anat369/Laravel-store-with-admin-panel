@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 
 class Item extends Model
 {
@@ -145,37 +145,10 @@ class Item extends Model
         return 'Нет категории';
     }
 
-    public function setDateAttribute($value)
-    {
-// используем класс laravel Carbon для преобразования вида даты в такой,
-// чтобы он сохранялся в базу данных mysql без ошибок
-        $date = Carbon::createFromFormat('d/m/y', $value)->format('Y-m-d');
-        $this->attributes['date'] = $date;
-    }
-
-    public function getDateAttribute($value)
-    {
-        $date = Carbon::createFromFormat('Y-m-d', $value)->format('d/m/y');
-
-        return $date;
-    }
-
     public function getCategoryID()
     {
 // делаем проверку на наличие категории у поста, если ее нет, то выводим  null
         return $this->category != null ? $this->category->id : null;
-    }
-
-    public function getDate()
-    {
-// используем класс Carbon чтобы показывать дату, взятую из базы в одном формате, в нужном формате
-        return Carbon::createFromFormat('d/m/y', $this->date)->format('F d, Y');
-    }
-
-// метод вывода категории у поста, если категории нет - ничего не выводим
-    public function hasCategory()
-    {
-        return $this->category != null ? true : false;
     }
 
     public static function getPopularGoods()
@@ -183,4 +156,8 @@ class Item extends Model
         return self::orderBy('views','desc')->take(3)->get();
     }
 
+    public static function getTitle(int $id)
+    {
+        return DB::table('items')->where('id', '=', $id)->value('title');
+    }
 }

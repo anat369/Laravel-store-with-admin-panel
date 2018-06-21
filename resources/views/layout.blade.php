@@ -19,7 +19,6 @@
 <body class="home green-shop-home">
 <div id="preloaderKDZ"></div>
 <div class="yolo-site">
-
     @include('pages.header')
 
     @yield('content')
