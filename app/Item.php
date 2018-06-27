@@ -30,6 +30,16 @@ class Item extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * У товара может быть только один бренд
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -60,7 +70,6 @@ class Item extends Model
         $item = new static;
         $item->fill($fields);
         $item->user_id = 1;
-//                dd($item);
         $item->save();
 
         return $item;
@@ -74,7 +83,6 @@ class Item extends Model
     public function edit($fields)
     {
         $this->fill($fields);
-//        dd($this->fill($fields));
         $this->save();
     }
 
@@ -102,7 +110,7 @@ class Item extends Model
         $this->removeImage();
 
         $filename = str_random(10) . '.' . $image->extension();
-        $image->storeAs('uploads', $filename);
+        $image->storeAs('uploads/items', $filename);
         $this->image = $filename;
         $this->save();
     }
@@ -112,7 +120,7 @@ class Item extends Model
         if (null == $this->image) {
             return '/img/no-image.png';
         }
-        return '/uploads/' . $this->image;
+        return '/uploads/items/' . $this->image;
     }
 
     public function removeImage()
@@ -121,11 +129,11 @@ class Item extends Model
         {
 // используя стандартный класс laravel Storage удаляем картинку,
 // если она была раньше загружена
-            Storage::delete('uploads/' . $this->image);
+            Storage::delete('uploads/items/' . $this->image);
         }
     }
 
-    public function setCategory(int $id)
+    public function setCategory($id)
     {
         if (null == $id) {
             return;
@@ -133,7 +141,6 @@ class Item extends Model
 
         $this->category_id = $id;
         $this->save();
-
     }
 
     public function getCategoryTitle()
@@ -149,6 +156,30 @@ class Item extends Model
     {
 // делаем проверку на наличие категории у поста, если ее нет, то выводим  null
         return $this->category != null ? $this->category->id : null;
+    }
+
+    public function setBrand($id)
+    {
+        if (null == $id) {
+            return;
+        }
+
+        $this->brand_id = $id;
+        $this->save();
+    }
+
+    public function getBrandTitle()
+    {
+        if (null != $this->brand) {
+            return $this->brand->title;
+        }
+
+        return 'Нет бренда';
+    }
+
+    public function getBrandID()
+    {
+        return $this->brand != null ? $this->brand->id : null;
     }
 
     public static function getPopularGoods()

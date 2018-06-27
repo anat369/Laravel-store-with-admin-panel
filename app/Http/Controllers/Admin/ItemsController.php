@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Brand;
 use App\Category;
 use App\Item;
 use Carbon\Carbon;
@@ -32,9 +33,12 @@ class ItemsController extends Controller
      */
     public function create()
     {
+        $brands = Brand::pluck('title', 'id')->all();
         $categories = Category::pluck('title', 'id')->all();
         $status = DB::table('status_item')->get();
+
         return view('admin.Items.create', [
+            'brands' => $brands,
             'categories' => $categories,
             'status' => $status,
         ]);
@@ -57,6 +61,7 @@ class ItemsController extends Controller
 
         $item = Item::add($request->all());
         $item->uploadImage($request->file('image'));
+        $item->setBrand($request->get('brand_id'));
         $item->setCategory($request->get('category_id'));
 
         return redirect()->route('items.index');
@@ -71,11 +76,13 @@ class ItemsController extends Controller
     public function edit(int $id)
     {
         $item = Item::find($id);
+        $brands = Brand::pluck('title', 'id')->all();
         $categories = Category::pluck('title', 'id')->all();
         $status = DB::table('status_item')->get();
 
         return view('admin.items.edit', [
             'item' => $item,
+            'brands' => $brands,
             'categories' => $categories,
             'status' => $status,
         ]);
@@ -100,6 +107,7 @@ class ItemsController extends Controller
         $item = Item::find($id);
         $item->edit($request->all());
         $item->uploadImage($request->file('image'));
+        $item->setBrand($request->get('brand_id'));
         $item->setCategory($request->get('category_id'));
 
         return redirect()->route('items.index');

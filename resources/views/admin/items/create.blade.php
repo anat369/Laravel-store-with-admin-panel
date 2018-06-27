@@ -36,13 +36,23 @@
                                 ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите категорию'])
                             }}
                         </div>
+
+                        <div class="form-group">
+                            <label>Выберите бренд</label>
+                            {{Form::select('brand_id',
+                                $brands,
+                                null,
+                                ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите бренд'])
+                            }}
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputPrice">Цена (данное поле заполняйте только цифрами)</label>
                             <input type="text" class="form-control" id="exampleInputPrice" placeholder="" name="price" value="{{old('price')}}">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputStatus">Статус товара</label>
+                            <label for="exampleInputStatus">Наличие товара</label>
                             <select name="status" id="exampleInputStatus">
                                 @foreach($status as $value)
                                     <option value="{{$value->id}}">{{$value->name}}</option>
@@ -51,11 +61,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputavAilability">Наличие товара</label>
+                            <label for="exampleInputavAilability">Вид товара</label>
                             <select name="availability" id="exampleInputAvailability">
-                                <option value="В наличии">В наличии</option>
-                                <option value="Под заказ">Под заказ</option>
-                                <option value="Недоступен">Недоступен</option>
+                                <option value="Обычный">Обычный</option>
+                                <option value="Популярный">Популярный</option>
+                                <option value="Новый">Новый</option>
                             </select>
                         </div>
 

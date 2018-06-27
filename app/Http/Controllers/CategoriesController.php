@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
+    /**
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();

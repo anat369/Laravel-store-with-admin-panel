@@ -40,7 +40,7 @@ $parentCategories = \App\ParentCategory::all();
                         <div class="shopping-cart-wrapper header-customize-item with-price">
                             <div class="widget_shopping_cart_content">
                                 <div class="widget_shopping_cart_icon"><i class="wicon fa fa-shopping-bag"></i><span
-                                            class="total">0</span></div>
+                                            class="total" id="cart-count">0</span></div>
                                 <div class="sub-total-text"><span
                                             class="product-begreen-price-amount amount"></span></div>
                                 <div class="cart_list_wrapper">
@@ -123,7 +123,20 @@ $parentCategories = \App\ParentCategory::all();
 
                             <li class="menu-item menu-blog"><a href="/blog">Блог</a></li>
                             @if(Auth::check())
-                                <li class="menu-item"><a href="/profile">Мой профиль</a></li>
+                                <li class="menu-item"><a href="/profile">Мой профиль</a>
+                                    <ul class="sub-menu">
+                                        <li class="menu_style_dropdown menu-item">
+                                            <ul class="sub-menu">
+                                                <li class="menu-item menu-item-object-page">
+                                                    <a href="/wishlist">Список избранных товаров </a>
+                                                </li>
+                                                <li class="menu-item menu-item-object-page">
+                                                    <a href="/cart">Корзина</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="menu-item"><a href="/logout">Выход</a></li>
                             @else
                                 <li class="menu-item"><a href="/register">Регистрация</a></li>

@@ -34,6 +34,8 @@
                                                         class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
                                             <a href="{{route('item.show', $item->slug)}}">
                                                 <h3>{{$item->title}}</h3>
+                                                {{$item->id}}
+
                                             </a>
                                             <span class="price"><span class="product-begreen-price-amount amount"><span
                                                             class="product-begreen-price-currencysymbol">$</span>55.00</span></span>
@@ -45,6 +47,11 @@
                                                                                               class="add_to_wishlist"><i
                                                                     class="fa fa-heart-o"></i> Add to Wishlist</a></div>
                                                 </div>
+                                                    <button type="submit" class="delete add_to_cart_button" data-id="{{$item->id}}">
+                                                        <i class="fa fa-remove"></i>
+                                                    </button>
+
+                                                {{Form::close()}}
                                                 <div class="add-to-cart-wrap"><a href="#" class="add_to_cart_button"><i
                                                                 class="fa fa-cart-plus"></i> Add to cart</a></div>
                                             </div>

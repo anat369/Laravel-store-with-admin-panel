@@ -30,12 +30,22 @@
 
                             <p class="help-block">Загружайте только картинки</p>
                         </div>
+
                         <div class="form-group">
                             <label>Категория</label>
                             {{Form::select('category_id',
                                 $categories,
                                 $item->getCategoryID(),
                                 ['class' => 'form-control select2'])
+                            }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Выберите бренд</label>
+                            {{Form::select('brand_id',
+                                $brands,
+                                $item->getBrandID(),
+                                ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите бренд'])
                             }}
                         </div>
 
@@ -54,14 +64,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputavAilability">Наличие товара</label>
+                            <label for="exampleInputavAilability">Вид товара</label>
                             <select name="availability" id="exampleInputAvailability">
-                                <option value="В наличии">В наличии</option>
-                                <option value="Под заказ">Под заказ</option>
-                                <option value="Недоступен">Недоступен</option>
+                                <option value="Обычный">Обычный</option>
+                                <option value="Популярный">Популярный</option>
+                                <option value="Новый">Новый</option>
                             </select>
                         </div>
-
 
                     </div>
                     <div class="col-md-12">

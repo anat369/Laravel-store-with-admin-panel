@@ -35,6 +35,18 @@
 
 @include('scripts')
 
+<script>
+    $(document).ready(function(){
+        $(".add_to_cart_button").click(function () {
+            var id = $(this).attr("data-id");
+            $.post("/cart/addCartAjax/"+id, {}, function (data) {
+                $("#cart-count").html(data);
+            });
+            return false;
+        });
+    });
+</script>
+
 </body>
 </html>
 

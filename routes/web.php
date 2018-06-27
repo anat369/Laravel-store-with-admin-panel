@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/logout', 'AuthController@logout');
     Route::get('/profile', 'ProfileController@index');
     Route::post('/profile', 'ProfileController@store');
-    Route::get('/cart', 'CartController@index');
+    Route::resource('/cart', 'CartController');
     Route::get('/wishlist', 'HomeController@wishList');
 });
 
@@ -43,10 +43,11 @@ Route::group(['middleware' => 'guest'], function() {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
     Route::get('/', 'DashboardController@index');
-    Route::resource('/parcat', 'ParentCategoriesController');
+    Route::resource('/brands', 'BrandsController');
     Route::resource('/categories', 'CategoriesController');
-    Route::resource('/users', 'UsersController');
     Route::resource('/items', 'ItemsController');
     Route::resource('/orders', 'OrdersController');
+    Route::resource('/parcat', 'ParentCategoriesController');
+    Route::resource('/users', 'UsersController');
 });
 

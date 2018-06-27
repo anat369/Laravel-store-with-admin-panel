@@ -28,6 +28,7 @@ class CreateItemsTable extends Migration
             $table->string('img_5')->nullable();
             $table->string('description');
             $table->integer('category_id')->nullable();
+            $table->integer('brand_id')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });
