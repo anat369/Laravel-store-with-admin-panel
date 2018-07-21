@@ -7,7 +7,7 @@
     <!-- Main content -->
     <section class="content">
 	{{Form::open([
-		'route'	=>	['users.update', $user->id],
+		'route'	=>	['admin.user.update', $user->id],
 		'method'	=>	'put',
 		'files'	=>	true
 	])}}

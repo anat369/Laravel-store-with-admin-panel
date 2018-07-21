@@ -1,57 +1,51 @@
 @extends('layout')
 @section('content')
-    <div id="example-wrapper" class="product my-account">
-        <div class="div-box">
-            <div class="banner-subpage">
-                <figure><img src="images/background/bg-banner.jpg" alt="bg-banner"/></figure>
-                <div class="banner-subpage-content">
-                    <h2>My Account</h2>
-                    <div class="desc">
-                        <p>Home </p>
-                        <p>Shop </p>
-                        <p>NewThe </p>
-                        <p>My Account</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="div-box mb mt">
-            <div class="container">
-                <div class="customer_login_form_wrap">
-                    <h2>Регистрация</h2>
 
-                    @include('admin.errors')
+    <!-- Main Container -->
+    <div class="main-wrapper">
 
-                    <form method="post" class="login" action="/register">
+        <!-- Container -->
+        <div class="container">
+            <div class="white-space space-big"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="fancy-title"><span>Введите данные для регистрации</span></h4>
+
+                @include('admin.errors')
+
+                <!-- Form -->
+                    <form class="form-horizontal animation fadeInRight" role="form" method="post" action="/register">
                         {{csrf_field()}}
-                        <p class="form-row form-row-wide">
-                            <label for="name" class="mb-20">Введите ваше имя</label>
-                            <input id="name" name="name" value="{{old('name')}}" type="text"
-                                   class="product-begreen-input product-begreen-input-text input-text"/>
-                        </p>
-                        <p class="form-row form-row-wide">
-                            <label for="email" class="mb-20">Введите адрес электронной почты</label>
-                            <input id="email" name="email" value="{{old('email')}}" type="email"
-                                   class="product-begreen-input product-begreen-input-text input-text"/>
-                        </p>
-                        <p class="form-row form-row-wide">
-                            <label for="password" class="mb-20 mt-20">Введите пароль<span
-                                        class="required">*</span></label>
-                            <input id="password" name="password" type="password"
-                                   class="product-begreen-input product-begreen-input-text input-text"/>
-                        </p>
-                        <p class="form-row mt-20 mb-20">
-                            <input name="login" type="submit" class="button"/>
-                        </p>
-                        <p class="product-begreen-lostpassword lost_password"><a href="#">Forgot your password?</a></p>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="name" class="form-control" name="name" value="{{old('name')}}" placeholder="Имя">
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="email" class="form-control" name="email" value="{{old('email')}}" placeholder="Электронная почта">
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="password" class="form-control" name="password" type="password" placeholder="Пароль">
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="password" class="form-control"  placeholder="Подтвердите пароль">
+                            </div>
+                            <div class="col-sm-12">
+                                <input name="register" type="submit" class="form-control btn btn-primary">
+                            </div>
+                        </div>
                     </form>
+                    <!-- /Form -->
+
+                    <div class="white-space space-small"></div>
                 </div>
             </div>
-        </div>
 
-        <div class="div-box">
-            @include('footer')
+            <div class="white-space space-medium"></div>
         </div>
+        <!-- /Container -->
 
     </div>
+    <!-- /Main Container -->
+
 @endsection

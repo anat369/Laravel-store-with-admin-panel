@@ -1,3 +1,8 @@
+<?php
+
+        $mails = \App\Http\Controllers\Admin\DashboardController::mail();
+        $count = \App\Http\Controllers\Admin\DashboardController::countNewMail();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +16,7 @@
         {
             display: inline-block;
         }
-        button.delete
-        {
+        button.delete        {
             background: transparent;
             border: none;
             color: #337ab7;
@@ -50,29 +54,31 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
+                            <span class="label label-success"><?= $count; ?></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
+                            <li class="header">У вас есть непрочитанные сообщения</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
+                                    @foreach($mails as $mail)
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                </div>
+                                                <h4>
+                                                    <?= $mail->name; ?>
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p><?= $mail->description; ?></p>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                        @endforeach
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
+                            <li class="footer"><a href="#">Смотреть все сообщения</a></li>
                         </ul>
                     </li>
                     <!-- Notifications: style can be found in dropdown.less -->
@@ -221,8 +227,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.7
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com/">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <strong>Copyright &copy; <a href="http://myorient.ru/">Блог обо всем</a>.</strong> Все права защищены
     </footer>
 
     <!-- Control Sidebar -->

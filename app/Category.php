@@ -10,7 +10,13 @@ class Category extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title','pid'];
+    protected $fillable = ['title', 'parent_id'];
+
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 
     public function items()
     {
@@ -31,13 +37,6 @@ class Category extends Model
         ];
     }
 
-    public static function getParentCategory()
-    {
-        $parentCategory = DB::table('categories')->where('pid', 0)->get(['id', 'title', 'slug']);
-
-        return $parentCategory;
-    }
-
     /**
      * Добавляем категорию
      *
@@ -50,6 +49,11 @@ class Category extends Model
         $category->fill($fields);
         $category->save();
         return $category;
+    }
+
+    public static function menuCategory()
+    {
+        return Category::all()->where('parent_id', '=', '0');
     }
 }
 

@@ -13,7 +13,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{route('brands.create')}}" class="btn btn-success">Добавить</a>
+                        <a href="{{route('admin.brand.create')}}" class="btn btn-success">Добавить</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
@@ -33,9 +33,9 @@
                                     <img src="{{$brand->getImage()}}" alt="" width="100">
                                 </td>
                                 <td>
-                                    <a href="{{route('brands.edit', $brand->id)}}" class="fa fa-pencil"></a>
+                                    <a href="{{route('admin.brand.edit', $brand->id)}}" class="fa fa-pencil"></a>
 
-                                    {{Form::open(['route'=>['brands.destroy', $brand->id], 'method'=>'delete'])}}
+                                    {{Form::open(['route'=>['admin.brand.destroy', $brand->id], 'method'=>'delete'])}}
                                     <button onclick="return confirm('Вы уверены, что хотите удалить данный бренд?')" type="submit" class="delete">
                                         <i class="fa fa-remove"></i>
                                     </button>

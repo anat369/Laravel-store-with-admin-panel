@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -151,6 +151,8 @@ return [
          * Package Service Providers...
          */
 
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -161,7 +163,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
     ],
 
     /*

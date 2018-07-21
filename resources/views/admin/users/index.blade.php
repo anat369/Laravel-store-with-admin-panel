@@ -15,7 +15,7 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <a href="{{route('users.create')}}" class="btn btn-success">Добавить</a>
+                <a href="{{route('admin.user.create')}}" class="btn btn-success">Добавить</a>
               </div>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -36,8 +36,8 @@
 	                  <td>
 	                    <img src="{{$user->getImage()}}" alt="Аватарка пользователя" class="img-responsive" width="150">
 	                  </td>
-	                  <td><a href="{{route('users.edit', $user->id)}}" class="fa fa-pencil"></a> 
-	                  {{Form::open(['route'=>['users.destroy', $user->id], 'method'=>'delete'])}}
+	                  <td><a href="{{route('admin.user.edit', $user->id)}}" class="fa fa-pencil"></a>
+	                  {{Form::open(['route'=>['admin.user.destroy', $user->id], 'method'=>'delete'])}}
 	                  <button onclick="return confirm('Вы точно хотите удалить?')" type="submit" class="delete">
 	                   <i class="fa fa-remove"></i>
 	                  </button>
@@ -46,8 +46,6 @@
 	                  </td>
 	                </tr>
                 @endforeach
-
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->

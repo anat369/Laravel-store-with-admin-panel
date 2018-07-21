@@ -5,7 +5,7 @@
   <div class="content-wrapper">
        <!-- Main content -->
     <section class="content">
-    {{Form::open(['route'	=>	'users.store', 'files'	=>	true])}}
+    {{Form::open(['route'	=>	'admin.user.store', 'files'	=>	true])}}
     <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
@@ -36,7 +36,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <a href="{{route('users.index')}}" class="btn btn-default">Назад</a>
+          <a href="{{route('admin.user.index')}}" class="btn btn-default">Назад</a>
           <button class="btn btn-success pull-right">Добавить</button>
         </div>
         <!-- /.box-footer-->

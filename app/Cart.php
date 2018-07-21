@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Cart extends Model
 {
@@ -11,14 +14,14 @@ class Cart extends Model
      * @param int $id <p>id товара</p>
      * @return integer <p>Количество товаров в корзине</p>
      */
-    public static function addProduct(int $id)
+    public static function addItem(int $id)
     {
         $itemsInCart = [];
 
         // Если в корзине уже есть товары (они хранятся в сессии)
-        if (isset($_SESSION['items'])) {
+        if (session()->get('items')) {
             // То заполним наш массив товарами
-            $productsInCart = $_SESSION['items'];
+            $itemsInCart = session()->get('items');
         }
 
         // Проверяем есть ли уже такой товар в корзине
@@ -31,31 +34,30 @@ class Cart extends Model
         }
 
         // Записываем массив с товарами в сессию
-        $_SESSION['items'] = $itemsInCart;
+        Session::put('items', $itemsInCart);
 
         // Возвращаем количество товаров в корзине
-        return self::countItems();
+         return self::countItemsInCart();
     }
 
     /**
      * Подсчет количество товаров в корзине (в сессии)
      * @return int <p>Количество товаров в корзине</p>
      */
-    public static function countItems()
+    public static function countItemsInCart()
     {
         // Проверка наличия товаров в корзине
-        if (isset($_SESSION['items'])) {
-            // Если массив с товарами есть
-            // Подсчитаем и вернем их количество
-            $count = 0;
-            foreach ($_SESSION['items'] as $id => $quantity) {
-                $count = $count + $quantity;
-            }
-            return $count;
+        if (session()->get('items')) {
+
+            $count =  array_sum(session()->get('items'));
+
         } else {
+
             // Если товаров нет, вернем 0
-            return 0;
+            $count =  0;
         }
+
+        return HomeController::declension(['товар', 'товара', 'товаров'], $count);
     }
 
     /**
@@ -65,8 +67,8 @@ class Cart extends Model
      */
     public static function getProducts()
     {
-        if (isset($_SESSION['items'])) {
-            return $_SESSION['items'];
+        if (session()->get('items')) {
+            return session()->get('items');
         }
         return false;
     }
@@ -76,19 +78,19 @@ class Cart extends Model
      * @param array $products <p>Массив с информацией о товарах</p>
      * @return integer <p>Общая стоимость</p>
      */
-    public static function getTotalPrice(array $items)
+    public static function getTotalPrice($products)
     {
         // Получаем массив с идентификаторами и количеством товаров в корзине
-        $itemsInCart = self::getProducts();
+        $productsInCart = self::getProducts();
 
         // Подсчитываем общую стоимость
         $total = 0;
-        if ($itemsInCart) {
+        if ($productsInCart) {
             // Если в корзине не пусто
             // Проходим по переданному в метод массиву товаров
-            foreach ($items as $item) {
+            foreach ($products as $item) {
                 // Находим общую стоимость: цена товара * количество товара
-                $total += $item['price'] * $itemsInCart[$item['id']];
+                $total += $item['price'] * $productsInCart[$item['id']];
             }
         }
 
@@ -100,8 +102,7 @@ class Cart extends Model
      */
     public static function clear()
     {
-        if (isset($_SESSION['items'])) {
-            unset($_SESSION['items']);
+        if (session()->get('items')) {
         }
     }
 
@@ -118,7 +119,7 @@ class Cart extends Model
         unset($itemsInCart[$id]);
 
         // Записываем массив товаров с удаленным элементом в сессию
-        $_SESSION['items'] = $itemsInCart;
+        Session::put('items', $itemsInCart);
     }
 
 }

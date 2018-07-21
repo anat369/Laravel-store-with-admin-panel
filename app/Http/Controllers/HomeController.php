@@ -2,43 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Category;
 use App\Item;
+use App\Review;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('pages.index');
-    }
-
-    public function itemsShow($slug)
-    {
-        $item = Item::where('slug', $slug)->firstOrFail();
-
-        if (NULL == $item->image)
-        {
-            $item->image = '/img/no-image.png';
-        }
-
-        $category = Category::find($item->category_id);
-        $simularItems = DB::table('items')
-                        ->where([
-                            ['category_id', '=', $item->category_id],
-                            ['id', '!=', $item->id]
-                        ])
-                        ->get();
-        return view('pages.item-show', [
-            'item' => $item,
-            'simularItems' => $simularItems,
-            'category' => $category,
+        return view('pages.index',[
+            'items' => Item::all(),
+            'categories'=> Category::all(),
+            'session' => session()->all(),
+            'popularItems' => Item::all()->where('is_popular', '=', '1'),
         ]);
     }
 
     public function wishList()
     {
         return view('pages.wishlist');
+    }
+
+    public function addCart(Request $request)
+    {
+        $count = Cart::addItem($request->itemId);
+
+        return $count;
+    }
+
+    public function deleteCart(Request $request)
+    {
+        Cart::deleteProduct($request->itemId);
+        return redirect()->back();
+    }
+
+    /**
+     * Правильное склонение числительных, передаем массив слов и число
+     *
+     * @param array $titles
+     * @param int $number
+     * @return string
+     */
+    public static function declension(array $titles, int $number)
+    {
+        $cases = [2, 0, 1, 1, 1, 2];
+        return $number." ".$titles[ ($number%100 > 4 && $number %100 < 20) ? 2 : $cases[min($number%10, 5)] ];
+
     }
 }

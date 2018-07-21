@@ -6,7 +6,7 @@
         <!-- Main content -->
         <section class="content">
         {{Form::open([
-            'route'	=>	['orders.update', $order->id],
+            'route'	=>	['admin.orders.update', $order->id],
             'method'	=>	'put'
         ])}}
         <!-- Default box -->

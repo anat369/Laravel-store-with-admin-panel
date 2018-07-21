@@ -18,7 +18,17 @@ class Item extends Model
      *
      * @var array
      */
-    protected $fillable =['title', 'description', 'price', 'status', 'availability'];
+    protected $fillable =['title',
+                        'description',
+                        'price',
+                        'status',
+                        'availability',
+                        'meta_title',
+                        'meta_description',
+                        'meta_keyword',
+                        'color',
+                        'material',
+                        ];
 
     /**
      * Один товар может принадлежать только одной категории
@@ -40,9 +50,9 @@ class Item extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function author()
+    public function reviews()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasMany(Review::class);
     }
 
     /**
@@ -190,5 +200,26 @@ class Item extends Model
     public static function getTitle(int $id)
     {
         return DB::table('items')->where('id', '=', $id)->value('title');
+    }
+
+    /**
+     * Определяем, является товар избранным для данного пользователя или нет
+     *
+     * @return bool
+     */
+    public function favorited()
+    {
+        return (bool) Favorite::where('user_id', Auth::id()) ->where('item_id', $this->id) ->first();
+    }
+
+    /**
+     * Получаем одобренные модератором отзывы для конкретного товара
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews()->where('status', '=', 1)->get();
+
     }
 }

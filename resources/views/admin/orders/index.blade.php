@@ -16,10 +16,9 @@
                         <thead>
                         <tr>
                             <th>Номер заказа</th>
-                            <th>Пользователь</th>
-                            <th>Товар</th>
                             <th>Статус</th>
-                            <th>Стоимость</th>
+                            <th>Пользователь</th>
+                            <th>Почта</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
@@ -27,14 +26,14 @@
                         @foreach($orders as $order)
                             <tr>
                                 <td>{{$order->id}}</td>
-                                <td>{{$order->name}}</td>
-                                <td>{{$order->title}}</td>
                                 <td>{{$order->status}}</td>
-                                <td>{{$order->price}}</td>
-                                <td>
-                                    <a href="{{route('orders.edit', $order->id)}}" class="fa fa-pencil"></a>
+                                <td>{{$order->user->name}}</td>
+                                <td>{{$order->user->email}}</td>
 
-                                    {{Form::open(['route'=>['orders.destroy', $order->id], 'method'=>'delete'])}}
+                                <td>
+                                    <a href="{{route('admin.order.edit', $order->id)}}" class="fa fa-pencil"></a>
+
+                                    {{Form::open(['route'=>['admin.order.destroy', $order->id], 'method'=>'delete'])}}
                                     <button onclick="return confirm('Вы уверены, что хотите удалить?')" type="submit" class="delete">
                                         <i class="fa fa-remove"></i>
                                     </button>

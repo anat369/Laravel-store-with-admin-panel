@@ -1,47 +1,92 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<html lang="ru" >
 <head>
-    <meta charset="UTF-8">
-    <title>Магазин вязаных вещей</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="images/icon/favicon.png" type="image/x-icon">
+    <!-- Meta -->
+    <meta name="description" content="@yield('meta_description')" />
+    <meta name="keywords" content="@yield('meta_keywords')" />
+    <meta name="author" content="@yield('author')">
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit-after" content="3 days" />
+    <title>@yield('title')</title>
 
-    <!-- Web Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico%7CSource+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&amp;amp;subset=latin-ext,vietnamese" rel="stylesheet">
+    <!-- Styles -->
 
     @include('css')
 
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/ico/favicon.png">
+
 </head>
-<body class="home green-shop-home">
-<div id="preloaderKDZ"></div>
-<div class="yolo-site">
-    @include('pages.header')
 
-    @yield('content')
+<body class="bg-pattern1" data-spy="scroll" data-target=".navbar">
+<div id="preloader"></div>
+
+<!-- Page Main Wrapper -->
+<div class="page-wrapper" id="page-top">
+
+    <!-- Header Container -->
+        @include('pages.header')
+    <!-- /Header Container -->
+
+   @yield('content')
+
+    <!-- Footer Container -->
+    @include('footer')
+    <!-- /Footer Container -->
 
 </div>
-<!-- .mv-site-->
 
-<div class="popup-wrapper">
-</div>
-<!-- .popup-wrapper-->
-<div class="click-back-top-body">
-    <button type="button" class="sn-btn sn-btn-style-17 sn-back-to-top fixed-right-bottom"><i class="btn-icon fa fa-angle-up"></i></button>
-</div>
+<!-- Back To Top -->
+<a href="#page-top" class="scrollup smooth-scroll" ><span class="fa fa-angle-up"></span></a>
+<!-- /Back To Top -->
+
+
+<!-- Javascripts
+================================================== -->
 
 @include('scripts')
 
 <script>
-    $(document).ready(function(){
-        $(".add_to_cart_button").click(function () {
-            var id = $(this).attr("data-id");
-            $.post("/cart/addCartAjax/"+id, {}, function (data) {
-                $("#cart-count").html(data);
+    jQuery(document).ready(function($) {
+        $('.add-to-cart').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/addCart',
+                data: $('.add-to-cart').serialize(),
+                success: function (response) {
+                    $("#cart-count").html(response);                }
             });
+
+            return false;
+        });
+    });
+</script>
+<script>
+    jQuery(document).ready(function($){
+        $(".user-phone").mask("+7 (999) 999-99-99");
+    });
+</script>
+<script>
+    jQuery(document).ready(function($) {
+        $('.contactForm').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/contactForm',
+                data: $('.contactForm').serialize(),
+                success: function(data){
+                    $('.messages').html(data.success('Сообщение успешно отправлено!')); // выводим ответ сервера
+                }
+            });
+
             return false;
         });
     });
@@ -49,4 +94,3 @@
 
 </body>
 </html>
-

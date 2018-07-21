@@ -35,9 +35,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function items()
+    /**
+     * Устанавливаем связь многие ко многим для заполнения таблицы избранных товаров
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favorites()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Item::class, 'favorites', 'user_id', 'item_id')->withTimeStamps();
     }
 
     /**
@@ -92,7 +97,7 @@ class User extends Authenticatable
         $this->removeAvatar();
         $filename = str_random(10) . '.' . $image->extension();
 // сохраняем аватарку
-        $image->storeAs('uploads', $filename);
+        $image->storeAs('uploads/users/', $filename);
         $this->avatar = $filename;
         $this->save();
     }
@@ -102,7 +107,7 @@ class User extends Authenticatable
 // при удалении пользователя удаляем его аватарку, если она была
         if(null != $this->avatar)
         {
-            Storage::delete('uploads/' . $this->avatar);
+            Storage::delete('uploads/users/' . $this->avatar);
         }
     }
 
@@ -112,7 +117,7 @@ class User extends Authenticatable
         {
             return '/img/no-image.png';
         }
-        return '/uploads/' . $this->avatar;
+        return '/uploads/users/' . $this->avatar;
     }
     public function makeAdmin()
     {

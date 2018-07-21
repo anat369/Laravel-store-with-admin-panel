@@ -6,7 +6,7 @@
         <!-- Main content -->
         <section class="content">
         {{Form::open([
-            'route'	=> 'brands.store',
+            'route'	=> 'admin.brand.store',
             'files'	=>	true
         ])}}
         <!-- Default box -->

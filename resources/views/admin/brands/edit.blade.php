@@ -6,7 +6,7 @@
         <!-- Main content -->
         <section class="content">
         {{Form::open([
-            'route'	=>	['brands.update', $brand->id],
+            'route'	=>	['admin.brand.update', $brand->id],
             'files'	=>	true,
             'method'	=>	'put'
         ])}}
@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputDescription">Описание</label>
-                            <textarea name="description" id="" cols="30" rows="10" class="form-control" >{{$brand->description}}</textarea>
+                            <textarea id="exampleInputDescription" name="description" id="" cols="30" rows="10" class="form-control" >{{$brand->description}}</textarea>
                         </div>
                     </div>
                 </div>

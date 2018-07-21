@@ -58,7 +58,7 @@ class Brand extends Model
     }
 
     /**
-     * Удаляем товар
+     * Удаляем бренд
      *
      */
     public function remove()
