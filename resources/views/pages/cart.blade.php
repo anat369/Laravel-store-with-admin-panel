@@ -58,26 +58,19 @@
                         </thead>
                         <tbody>
                         @foreach($items as $item)
-                        <tr>
+                        <tr class="itemCart" id="{{$item->id}}">
                             <td class="td-cart-image"><img src="/uploads/items/{{$item->image}}" alt="Product"></td>
                             <td><a href="{{route('item.show', $item->slug)}}">{{$item->title}}</a></td>
                             <td>{{$item->price}} р.</td>
                             <td>{{$item->count}}</td>
                             <td>{{$item->price * $item->count}} р.</td>
-                            <td class="td-remove">
-                                <form method="POST" action="/deleteCart">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="itemId" value="{{$item->id}}"/>
-                                    <input type="submit" class="form-control btn btn-info" value="Удалить">
-                                    </a>
-                                </form>
-                            </td>
+                            <td class="td-remove"><a href="#" class="deleteItem" data-id="{{$item->id}}"><div class="icon-wrapper icon-border-round fa-lg"><i class="fa fa-trash-o"></i></div></a></td>
                         </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="6" class="totalPrice">
                                 <input type="hidden" value="{{ $totalPrice }}" name="price">
                                 Общая стоимость заказа: {{ $totalPrice }} p.
                             </td>

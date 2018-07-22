@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Favorite;
 use App\Item;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -37,30 +39,26 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'Ваш профиль был успешно обновлен');
     }
 
-    /**
-     *  Добавляем товар в избранное
-     *
-     * @param Item $item
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function favoriteItem(Item $item)
-    {
-        Auth::user()->favorites()->attach($item->id);
-
-        return back();
-    }
 
     /**
-     * Удаляем товар из избранного
+     *  Добавляем и удаляем товар из избранного
      *
-     * @param Item $item
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function unFavoriteItem(Item $item)
+    public function favoriteItem(Request $request)
     {
-        Auth::user()->favorites()->detach($item->id);
 
-        return back();
+        $item = Item::find($request->itemId);
+        if ($item->favorited())
+        {
+            Auth::user()->favorites()->detach($request->itemId);
+
+            return response(['added' => true]);
+        } else {
+            Auth::user()->favorites()->attach($request->itemId);
+            return response(['added' => false]);
+        }
     }
 
     /**
@@ -71,10 +69,9 @@ class UserController extends Controller
     public function myFavorites()
     {
 
-        $favoriteItems = Auth::user()->favorites();
-//        dd($favoriteItems);
+        $myFavorites = Auth::user()->favorites;
         return view('pages.favorites', [
-            'favoriteItems' => Auth::user()->favorites(),
+            'favoriteItems' => $myFavorites,
         ]);
     }
 }

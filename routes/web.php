@@ -31,14 +31,12 @@ Route::post('/order', 'CartController@order')->name('cartOrder');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', 'AuthController@logout');
-    Route::get('/wishlist', 'HomeController@wishList');
     Route::get('/orders', 'CartController@orders');
     Route::post('/addReview', 'ReviewController@addReview');
 
     Route::get('/profile', 'UserController@index');
     Route::post('/updateProfile', 'UserController@update')->name('updateProfile');
-    Route::post('/favorite/{slug}', 'UserController@favoriteItem');
-    Route::post('/unfavorite/{slug}', 'UserController@unFavoriteItem');
+    Route::post('/favoriteItem', 'UserController@favoriteItem');
     Route::get('/my_favorites', 'UserController@myFavorites')->name('my_favorites');
 
 });

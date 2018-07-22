@@ -50,6 +50,9 @@
 <!-- Pie Chart -->
 <script src="/js/themejs/jquery.easypiechart.min.js" type="text/javascript"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/social-likes/dist/social-likes.min.js"></script>
+
+
 <!-- Google Maps -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQFwfZe32U9zTqZ_KFKDT8_ehgJdZMeyc"></script>
 

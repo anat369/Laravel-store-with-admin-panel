@@ -17,10 +17,30 @@
         </div>
         <div class="product-links">
             <ul>
-                <li><a href="#" class="ToolTip" title="В корзину" data-opie-position="tc:bc"><span class="fa fa-shopping-cart"></span></a></li>
+                <li>
+                    <a href="#" class="ToolTip add-to-cart" title="В корзину" data-id="{{$item->id}}" data-opie-position="tc:bc">
+                        <span class="fa fa-shopping-cart"></span>
+                    </a>
+                </li>
                 @if (Auth::check())
-                <li><a href="#" class="ToolTip" title="В избранное" data-opie-position="tc:bc"><span class="fa fa-heart-o"></span></a></li>
-                @endif
+
+                    @if(!$item->favorited())
+                        <li>
+                            <a href="#" class="ToolTip favorites" data-html="true"  title="Избранное" data-id="{{$item->id}}"
+                               data-opie-position="tc:bc" >
+                                <span class="fa fa-heart-o"></span>
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="#" class="ToolTip favorites" data-html="true"  title="Избранное" data-id="{{$item->id}}"
+                               data-opie-position="tc:bc">
+                                <span class="fa fa-heart"></span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @endif
                 <li><a href="{{route('item.show', $item->slug)}}" class="ToolTip" title="Посмотреть" data-opie-position="tc:bc"><span class="fa fa-list-ul"></span></a></li>
             </ul>
         </div>

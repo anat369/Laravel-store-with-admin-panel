@@ -20,11 +20,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function wishList()
-    {
-        return view('pages.wishlist');
-    }
-
     public function addCart(Request $request)
     {
         $count = Cart::addItem($request->itemId);
@@ -35,7 +30,7 @@ class HomeController extends Controller
     public function deleteCart(Request $request)
     {
         Cart::deleteProduct($request->itemId);
-        return redirect()->back();
+        return Cart::countItemsInCart();
     }
 
     /**

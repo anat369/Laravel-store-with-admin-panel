@@ -10,11 +10,19 @@
     <meta name="author" content="@yield('author')">
     <meta name="robots" content="index, follow" />
     <meta name="revisit-after" content="3 days" />
+
+
+
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:description" content="@yield('meta_description')" />
     <title>@yield('title')</title>
 
     <!-- Styles -->
 
     @include('css')
+
+
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
@@ -54,21 +62,72 @@
 @include('scripts')
 
 <script>
+    // добавление товара в корзину
     jQuery(document).ready(function($) {
-        $('.add-to-cart').on('submit', function(e){
-            e.preventDefault();
+        $('.add-to-cart').click(function () {
+            var itemId = $(this).data('id');
+            var el = $(this);
             $.ajax({
                 type: 'POST',
                 url: '/addCart',
-                data: $('.add-to-cart').serialize(),
+                data: {_token: "{{ csrf_token() }}", itemId: itemId},
                 success: function (response) {
-                    $("#cart-count").html(response);                }
+                    $("#cart-count").html(response);
+                }
             });
-
             return false;
         });
     });
 </script>
+<script>
+    // добавление и удаление товара из избранного
+    jQuery(document).ready(function($) {
+        $('.favorites').click(function () {
+            var el = $(this);
+            var itemId = $(this).data('id');
+            $.ajax({
+                type: 'POST',
+                url: '/favoriteItem',
+                data: {_token: "{{ csrf_token() }}", itemId: itemId},
+                success: function (response) {
+                    if (response.added) {
+                        el.attr('title', 'Добавить в избранное');
+                        el.html('<span class="fa fa-heart" aria-hidden="true"></span>');
+                    } else  {
+                        el.attr('title', 'Удалить из избранного');
+                        el.html('<span class="fa fa-heart-o" aria-hidden="true"></span>');
+                    }
+                }
+            }, 'json');
+
+            return false;
+        });
+    });
+
+</script>
+
+<script>
+    // удаление товара из корзины
+    jQuery(document).ready(function($) {
+        $('.deleteItem').click(function () {
+            var itemId = $(this).data('id');
+            var el = $(this);
+            $.ajax({
+                type: 'POST',
+                url: '/deleteCart',
+                data: {_token: "{{ csrf_token() }}", itemId: itemId},
+                success: function (response) {
+                    $("#"+itemId).hide();
+                    $("#cart-count").html(response);
+                    console.log(response);
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+
 <script>
     jQuery(document).ready(function($){
         $(".user-phone").mask("+7 (999) 999-99-99");

@@ -21,18 +21,15 @@ class CartController extends Controller
 
         // Получим идентификаторы и количество товаров в корзине
         if ($itemsInCart) {
-            // Если в корзине есть товары, получаем полную информацию о товарах для списка
-            // Получаем массив только с идентификаторами товаров
-
             foreach ($itemsInCart as $key => $value) {
                 $items[$key] = Item::find($key);
                 $items[$key]['count'] = $value;
-                $totalPrice +=  $items[$key]->price * $items[$key]['count'];
             }
         }
 
+        $totalPrice = Cart::getTotalPrice($itemsInCart);
+
         return view('pages.cart', [
-            'www' => $itemsInCart,
             'items' => $items,
             'totalPrice' => $totalPrice,
         ]);

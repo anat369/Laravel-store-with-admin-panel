@@ -80,17 +80,13 @@ class Cart extends Model
      */
     public static function getTotalPrice($products)
     {
-        // Получаем массив с идентификаторами и количеством товаров в корзине
-        $productsInCart = self::getProducts();
-
         // Подсчитываем общую стоимость
         $total = 0;
-        if ($productsInCart) {
-            // Если в корзине не пусто
-            // Проходим по переданному в метод массиву товаров
-            foreach ($products as $item) {
-                // Находим общую стоимость: цена товара * количество товара
-                $total += $item['price'] * $productsInCart[$item['id']];
+        if ($products) {
+            foreach ($products as $key => $value) {
+                $items[$key] = Item::find($key);
+                $items[$key]['count'] = $value;
+                $total +=  $items[$key]->price * $items[$key]['count'];
             }
         }
 

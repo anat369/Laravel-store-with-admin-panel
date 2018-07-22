@@ -3,6 +3,7 @@
 @section('title', $item->meta_title)
 @section('meta_description', $item->meta_description)
 @section('meta_keywords', $item->meta_keyword)
+@section('image', $item->getImage())
 
 @section('content')
     <!-- Main Wrapper Header -->
@@ -80,15 +81,18 @@
                             <li><strong>Категория:</strong> <a href="{{route('category.show', $item->category->slug)}}">{{$item->category->title}}</a></li>
                             <li><strong>Цвет:</strong> <a href="#">{{$item->color}}</a></li>
                             <li><strong>Материал:</strong> <a href="#">{{$item->material}}</a></li>
+                            <li><strong>Поделиться в социальных сетях:</strong></li>
+                            <div class="social-likes" data-counters="no" data-url="{{\Illuminate\Support\Facades\URL::current()}}">
+                                <div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
+                                <div class="vkontakte" title="Поделиться ссылкой во Вконтакте">Вконтакте</div>
+                                <div class="odnoklassniki" title="Поделиться ссылкой в Одноклассниках">Одноклассники</div>
+                            </div>
+                            <li></li>
+
                         </ul>
 
                         <div class="white-space space-xsmall"></div>
-
-                        <form method="POST" class="add-to-cart">
-                            {{ csrf_field() }}
-                                    <input type="hidden" name="itemId" value="{{$item->id}}"/>
-                            <input type="submit" class="form-control btn btn-primary" value="Добавить в корзину">
-                        </form>
+                            <a href="#" class="btn btn-primary add-to-cart" data-id="{{$item->id}}">Добавить в корзину</a>
                     </div>
 
                     <div class="white-space space-big"></div>
@@ -151,7 +155,8 @@
                                 </form>
                                 <!-- /Form -->
                                 @else
-                                <p>Чтобы оставить отзыв <a href="/login">войдите</a> или <a href="/register">зарегистрируйтесь</a>!</p>
+                                <br>
+                                <h4>Для того чтобы оставить отзыв, <a href="/login">войдите</a> или <a href="/register">зарегистрируйтесь</a>!</h4>
                             @endif
 
 
